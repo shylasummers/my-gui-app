@@ -1,11 +1,11 @@
 const express = require("express");
 const { spawn } = require("child_process");
 const path = require("path");
-const cors = require("cors"); // Import the cors package
+const cors = require("cors");
 const app = express();
 const port = 1000;
 
-app.use(cors()); // Use the cors middleware to enable CORS support
+app.use(cors());
 
 app.use(express.json());
 
@@ -14,7 +14,6 @@ app.post("/solve", (req, res) => {
 
   res.header("Access-Control-Allow-Origin", "*");
 
-  // Use a relative path to run the Python script in the same folder
   const pythonProcess = spawn("python3", [
     path.join(__dirname, "logic_generator.py"),
     JSON.stringify(data),
@@ -36,7 +35,6 @@ app.post("/discovery", (req, res) => {
 
   res.header("Access-Control-Allow-Origin", "*");
 
-  // Use a relative path to run the Python script in the same folder
   const pythonProcess = spawn("python3", [
     path.join(__dirname, "logic_discovery.py"),
     JSON.stringify(data),

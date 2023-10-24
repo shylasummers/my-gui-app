@@ -2,12 +2,10 @@ import json
 from z3 import *
 import sys
 
-# Create a Z3 solver instance
 solver = Solver()
 
 truth_values = json.loads(sys.argv[1])
 
-# Define constants
 year = BoolVal(truth_values['year_external'])
 ldv = BoolVal(truth_values['LDV_external'])
 ldt = BoolVal(truth_values['LDT_external'])
@@ -27,19 +25,16 @@ co = BoolVal(truth_values['co_external'])
 formaldehyde = BoolVal(truth_values['formaldehyde_external'])
 low_alt = BoolVal(truth_values['altitude_external'])
 
-# Define constant symbols for functions
 law_applies = Bool('law_applies')
 test_correct = Bool('test_correct')
 test_passed = Bool('test_passed')
 motor_vehicle_emissions_problem = Bool('motor_vehicle_emissions_problem')
 
-# Define constraints
 solver.add(law_applies == Or(And(year, Or(ldv, ldt, mdpv))))
 solver.add(test_correct == And(And(Or(Not(ac), sc03, And(Or(five_cycle_test, five_cycle_type_alt, five_cycle_type_duel, five_cycle_type_elec), substitution)), E_fuel, low_alt)))
 solver.add(test_passed == And(And(And(hydrocarbon, pmftp, pmus), co, formaldehyde)))
 solver.add(motor_vehicle_emissions_problem == And(law_applies, test_correct, test_passed))
 
-# Check satisfiability
 result = solver.check()
 
 if result == sat:

@@ -2,14 +2,12 @@ import json
 from z3 import *
 import sys
 
-# Create a Z3 solver instance
 solver = Solver()
 
 values_inputted = json.loads(sys.argv[1])
 truth_values = values_inputted.get("truth_values")
 first_result = values_inputted.get("first_result")
 
-# Define constants
 year = BoolVal(truth_values['year_external'])
 ldv = BoolVal(truth_values['LDV_external'])
 ldt = BoolVal(truth_values['LDT_external'])
@@ -29,7 +27,6 @@ co = BoolVal(truth_values['co_external'])
 formaldehyde = BoolVal(truth_values['formaldehyde_external'])
 low_alt = BoolVal(truth_values['altitude_external'])
 
-# Define constant symbols for functions
 law_applies_neg_year = Bool('law_applies_neg_year')
 law_applies_neg_vehicle = Bool('law_applies_neg_vehicle')
 test_correct_neg_AC_testing = Bool('test_correct_neg_AC_testing')
@@ -42,7 +39,6 @@ test_passed_neg_pmus = Bool('test_passed_neg_pmus')
 test_passed_neg_co = Bool('test_passed_neg_co')
 test_passed_neg_formaldehyde = Bool('test_passed_neg_formaldehyde')
 
-# Define constraints
 solver.add(law_applies_neg_year == Not(year))
 solver.add(law_applies_neg_vehicle == Not(Or(ldv, ldt, mdpv)))
 solver.add(test_correct_neg_AC_testing == Not(Or(Not(ac), sc03, And(Or(five_cycle_test, five_cycle_type_alt, five_cycle_type_duel, five_cycle_type_elec)))))
@@ -55,7 +51,6 @@ solver.add(test_passed_neg_pmus == Not(pmus))
 solver.add(test_passed_neg_co == Not(co))
 solver.add(test_passed_neg_formaldehyde == Not(formaldehyde))
 
-# Check satisfiability
 result = solver.check()
 
 if result == sat:
@@ -67,7 +62,6 @@ if result == sat:
 else:
     result_data = {"status": "Unsatisfiable"}
 
-# Find what went wrong
 if(first_result.get("model") is None):
     raise Exception("Unsatisfiable: means that Z3 code in Python file is wrong.")
 elif(first_result.get("model").get("motor_vehicle_emissions_problem") is None):
