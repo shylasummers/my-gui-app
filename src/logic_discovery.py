@@ -85,26 +85,26 @@ elif(first_result.get("model").get("test_correct") is None):
     raise Exception("Unknown if the test was done correctly.")
 elif(first_result.get("model").get("test_correct") == "False"):
     if(result_data.get("model").get("test_correct_neg_AC_testing") == "True"):
-        result_data["failure"] = "If the vehicle has air conditioning and does not qualify for derived 5-cycle testing, it must be tested with the SC03 driving cycle."
+        result_data["failure"] = "If the vehicle has air conditioning and does not qualify for derived 5-cycle testing, it must be tested with the SC03 driving cycle. This vehicle has not been tested with the SC03 driving cycle."
     elif(result_data.get("model").get("test_correct_neg_substitution") == "True"):
-        result_data["failure"] = "If the vehicle qualifies for derived 5-cycle testing and the vehicle has AC, when calculating the SFTP value, either the SC03 value can be used or the FTP value must be substituted for the SC03 value."
+        result_data["failure"] = "If the vehicle qualifies for derived 5-cycle testing and the vehicle has AC, when calculating the SFTP value, either the SC03 value can be used or the FTP value must be substituted for the SC03 value. This vehicle is not using either of these when calculating the SFTP value."
     elif(result_data.get("model").get("test_correct_neg_E10") == "True"):
         result_data["failure"] = "The testing must be done with E10 fuel."
     else:
-        result_data["failure"] = "The testing must be done in low-altitude conditions, which is defined as 4000 feet or less above sea level."
+        result_data["failure"] = "The testing must be done in low-altitude conditions, which is defined as 4000 feet or less above sea level. This vehicle was tested in high-altitude conditions."
 elif(first_result.get("model").get("test_passed") is None):
     raise Exception("Unknown if the test was passed.")
 elif(first_result.get("model").get("test_passed") == "False"):
     if(result_data.get("model").get("test_passed_neg_hydro") == "True"):
-        result_data["failure"] = "Combined hydrocarbon, nitric oxide, and nitrogen dioxide emissions for the vehicle must be equal to or below 0.050 g/mi."
+        result_data["failure"] = "Combined hydrocarbon, nitric oxide, and nitrogen dioxide emissions for the vehicle must be equal to or below 0.050 g/mi. The emissions for this vehicle exceeds this number."
     elif(result_data.get("model").get("test_passed_neg_pmftp") == "True"):
-        result_data["failure"] = "Particulate matter emissions for the vehicle must be equal to or below 0.003 g/mi when tested with the FTP driving schedule."
+        result_data["failure"] = "Particulate matter emissions for the vehicle must be equal to or below 0.003 g/mi when tested with the FTP driving schedule. The emissions for this vehicle exceeds this number."
     elif(result_data.get("model").get("test_passed_neg_pmus") == "True"):
-        result_data["failure"] = "Particulate matter emissions for the vehicle must be equal to or below 0.006 g/mi when tested with the SC06 driving schedule."
+        result_data["failure"] = "Particulate matter emissions for the vehicle must be equal to or below 0.006 g/mi when tested with the SC06 driving schedule. The emissions for this vehicle exceeds this number."
     elif(result_data.get("model").get("test_passed_neg_co") == "True"):
-        result_data["failure"] = "Carbon monoxide emissions for the vehicle must be equal to or below 4.2 g/mi."
+        result_data["failure"] = "Carbon monoxide emissions for the vehicle must be equal to or below 4.2 g/mi when tested with the SFTP driving schedule. The emissions for this vehicle exceeds this number."
     else:
-        result_data["failure"] = "Formaldehyde emissions for the vehicle must be equal to or below 0.004 g/mi."
+        result_data["failure"] = "Formaldehyde emissions for the vehicle must be equal to or below 0.004 g/mi when tested with the FTP driving schedule. The emissions for this vehicle exceeds this number."
 else:
     raise Exception("Unknown what failed in determining compliance.")
 print(json.dumps(result_data))

@@ -502,7 +502,7 @@ function App() {
           bg="customPrimary.100"
         >
           <Text fontSize="xl" ml="75px">
-            Enter the altitude in miles for which the FTP and SFTP testing was done:
+            Enter the altitude in feet for which the FTP and SFTP testing was done:
           </Text>
           <Altitude onAltitudeChange={handleVehicleAltitudeChange} />
         </Box>
