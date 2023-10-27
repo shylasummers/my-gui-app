@@ -81,7 +81,7 @@ elif(first_result.get("model").get("test_correct") == "False"):
     if(result_data.get("model").get("test_correct_neg_AC_testing") == "True"):
         result_data["failure"] = "If the vehicle has air conditioning and does not qualify for derived 5-cycle testing, it must be tested with the SC03 driving cycle. This vehicle has not been tested with the SC03 driving cycle."
     elif(result_data.get("model").get("test_correct_neg_substitution") == "True"):
-        result_data["failure"] = "If the vehicle qualifies for derived 5-cycle testing and the vehicle has AC, when calculating the SFTP value, either the SC03 value can be used or the FTP value must be substituted for the SC03 value. This vehicle is not using either of these when calculating the SFTP value."
+        result_data["failure"] = "If the vehicle qualifies for derived 5-cycle testing and the vehicle has AC, when calculating the SFTP value, either the SC03 value can be used or the FTP value must be substituted for the SC03 value. Neither of these have been used when calculating this vehicle's SFTP emissions values."
     elif(result_data.get("model").get("test_correct_neg_E10") == "True"):
         result_data["failure"] = "The testing must be done with E10 fuel."
     else:
