@@ -44,7 +44,7 @@ function AlternateType({ onAlternateTypeChange }) {
   const options = [
     "Alternative-fuel vehicle",
     "Duel-fuel vehicle using alternative fuel",
-    "Plug-in hybrid vehicle",
+    "Plug-in hybrid electric vehicle",
     "Other or None",
   ];
 
