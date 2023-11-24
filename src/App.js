@@ -168,7 +168,7 @@ function App() {
         formaldehyde_external = false;
       }
 
-      if (altitude <= 4000 || (altitude == null && altitude_external === true)) {
+      if (altitude <= 5315 || (altitude == null && altitude_external === true)) {
         altitude_external = true;
       } else {
         altitude_external = false;
